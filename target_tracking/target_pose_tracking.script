@@ -1,0 +1,45 @@
+def unnamed():
+  set_standard_analog_input_domain(0, 1)
+  set_standard_analog_input_domain(1, 1)
+  set_tool_analog_input_domain(0, 1)
+  set_tool_analog_input_domain(1, 1)
+  set_analog_outputdomain(0, 0)
+  set_analog_outputdomain(1, 0)
+  set_tool_voltage(0)
+  set_input_actions_to_default()
+  set_tcp(p[0.0,0.0,0.0,0.0,0.0,0.0])
+  set_payload(0.0)
+  set_gravity([0.0, 0.0, 9.82])
+  $ 1 "BeforeStart"
+  $ 2 "target_pose≔Tool"
+  global target_pose=get_forward_kin()
+  $ 3 "Popup"
+  popup("Program has started from the beginning :D", "Message", False, False, blocking=True)
+  $ 7 "Thread_1"
+  thread Thread_1():
+    while (True):
+      global target_pose=get_forward_kin()
+      while (True):
+        global tmp=p[0,0,0,0,0,0]
+        tmp[0] = read_input_float_register(0)
+        tmp[1] = read_input_float_register(1)
+        tmp[2] = read_input_float_register(2)
+        tmp[3] = read_input_float_register(3)
+        tmp[4] = read_input_float_register(4)
+        tmp[5] = read_input_float_register(5)
+        if (tmp != p[0,0,0,0,0,0]):
+          global target_pose=tmp
+        end
+        sync()
+      end
+    end
+  end
+  threadId_Thread_1 = run Thread_1()
+  while (True):
+    $ 4 "Robot Program"
+    $ 5 "servoj(get_inverse_kin(target_pose))"
+    servoj(get_inverse_kin(target_pose))
+    $ 6 "sync()"
+    sync()
+  end
+end

@@ -1,0 +1,20 @@
+ Program
+   BeforeStart
+     target_pose≔Tool
+     Popup
+   Robot Program
+     servoj(get_inverse_kin(target_pose))
+     sync()
+   Thread_1
+     target_pose≔Tool
+     Loop
+       tmp≔p[0,0,0,0,0,0]
+       tmp[0] = read_input_float_register(0)
+       tmp[1] = read_input_float_register(1)
+       tmp[2] = read_input_float_register(2)
+       tmp[3] = read_input_float_register(3)
+       tmp[4] = read_input_float_register(4)
+       tmp[5] = read_input_float_register(5)
+       If tmp != p[0,0,0,0,0,0]
+         target_pose≔tmp
+       sync()
