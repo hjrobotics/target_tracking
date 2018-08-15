@@ -1,8 +1,4 @@
-
-# coding: utf-8
-
-# In[2]:
-
+import math
 
 class quaternion:
     def __init__(self, w, x, y, z):
@@ -42,7 +38,9 @@ class quaternion:
         az = angle * self.z / math.sqrt(1-w*w)
         return ax, ay, az
 
-    def axis_angle_to_quaternion(ax, ay, az):
+    @staticmethod
+    def axis_angle_to_quaternion(a = None):
+        ax, ay, az = a[0], a[1], a[2]
         angle = math.sqrt(ax*ax + ay*ay + az*az)
         return quaternion(math.cos(angle/2), 
                           ax*math.sin(angle/2)/angle, 
@@ -61,13 +59,14 @@ class quaternion:
                           -x1 * z0 + y1 * w0 + z1 * x0 + w1 * y0,
                           x1 * y0 - y1 * x0 + z1 * w0 + w1 * z0)
 
-    def rotate_vector(self, vector):
+    def rotate_vector(self, v):
         # self*vector*conjugate(self)
-        a, b, c = vector
-        half = multiply(self, [0, a, b, c])
-        return multiply(half, conjugate(self))
+        assert len(v) == 3
+        half = self.multiply(quaternion(0, v[0], v[1], v[2]))
+        full = half.multiply(self.conjugate())
+        return full.x, full.y, full.z
     
     def delta(self, q0):
         # self*conjugate(q0)
-        return multiply(self, conjugate(q0))
+        return self.multiply(q0.conjugate())
 
