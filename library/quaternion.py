@@ -36,7 +36,7 @@ class quaternion:
         ax = angle * self.x / math.sqrt(1-w*w)
         ay = angle * self.y / math.sqrt(1-w*w)
         az = angle * self.z / math.sqrt(1-w*w)
-        return ax, ay, az
+        return [ax, ay, az]
 
     @staticmethod
     def axis_angle_to_quaternion(a = None):
