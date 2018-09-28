@@ -3,6 +3,8 @@
 	<recipe key="state">
 		<field name="actual_TCP_pose" type="VECTOR6D"/>
 		<field name="output_int_register_0" type="INT32"/>
+		<field name="tcp_force_scalar" type="DOUBLE"/>
+
 	</recipe>
 
 	<recipe key="setp">
