@@ -1,0 +1,34 @@
+ Program
+   BeforeStart
+     isJoint≔0
+     target_pose≔Tool
+     toClose≔0
+     toOpen≔0
+     Popup
+   Robot Program
+     servoj(get_inverse_kin(target_pose))
+     If isJoint≟0
+       servoj(get_inverse_kin(target_pose))
+     Else
+       servoj(target_pose)
+     If toClose≠0
+       Missing: Gripper
+     If toOpen≠0
+       Missing: Gripper
+     sync()
+   Thread_1
+     target_pose≔Tool
+     Loop
+       tmp≔p[0,0,0,0,0,0]
+       tmp[0] = read_input_float_register(0)
+       tmp[1] = read_input_float_register(1)
+       tmp[2] = read_input_float_register(2)
+       tmp[3] = read_input_float_register(3)
+       tmp[4] = read_input_float_register(4)
+       tmp[5] = read_input_float_register(5)
+       toClose = read_input_integer_register(1)
+       toOpen = read_input_integer_register(2)
+       isJoint = read_input_integer_register(3)
+       If tmp!=p[0,0,0,0,0,0]
+         target_pose≔tmp
+       sync()
