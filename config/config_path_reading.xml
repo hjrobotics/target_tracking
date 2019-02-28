@@ -26,7 +26,7 @@
 		<field name="input_int_register_2" type="INT32"/>
 	</recipe>
 
-	<recipe key="is_tracking_joint">
+	<recipe key="is_joint">
 		<field name="input_int_register_3" type="INT32"/>
 	</recipe>
 
