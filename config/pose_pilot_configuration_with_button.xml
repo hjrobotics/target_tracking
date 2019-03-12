@@ -5,6 +5,9 @@
 		<field name="output_int_register_0" type="INT32"/>
 		<field name="tcp_force_scalar" type="DOUBLE"/>
 		<field name="actual_TCP_force" type="VECTOR6D"/>
+                <field name="runtime_state" type="UINT32"/>
+		<field name="actual_qd" type="VECTOR6D"/>
+
 
 
 	</recipe>
