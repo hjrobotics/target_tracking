@@ -25,6 +25,13 @@
 	<recipe key="button">
 		<field name="input_int_register_1" type="INT32"/>
 		<field name="input_int_register_2" type="INT32"/>
+		<field name="input_int_register_3" type="INT32"/>
+	</recipe>
+
+	<recipe key="gripper">
+		<field name="input_int_register_4" type="INT32"/>
+		<field name="input_int_register_5" type="INT32"/>
+		<field name="input_int_register_6" type="INT32"/>
 	</recipe>
 
 </rtde_config>
